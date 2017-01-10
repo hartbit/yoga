@@ -36,6 +36,7 @@
 		63AB4B8F1E24E15500045309 /* YGNodeList.h in Headers */ = {isa = PBXBuildFile; fileRef = 13687D611DF8778F00E7C260 /* YGNodeList.h */; };
 		63AB4B901E24E15500045309 /* Yoga.h in Headers */ = {isa = PBXBuildFile; fileRef = 13687D631DF8778F00E7C260 /* Yoga.h */; };
 		63AB4B911E24E15500045309 /* YGLayout+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 638A94421E1EF5D000A726AD /* YGLayout+Private.h */; };
+		63AB4B921E24E49400045309 /* YGMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 13687D5F1DF8778F00E7C260 /* YGMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -262,9 +263,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				63AB4B7F1E24E11D00045309 /* YogaKit.h in Headers */,
-				63AB4B8C1E24E14A00045309 /* YGEnums.h in Headers */,
 				63AB4B8D1E24E14A00045309 /* UIView+Yoga.h in Headers */,
 				63AB4B8E1E24E14A00045309 /* YGLayout.h in Headers */,
+				63AB4B8C1E24E14A00045309 /* YGEnums.h in Headers */,
+				63AB4B921E24E49400045309 /* YGMacros.h in Headers */,
 				63AB4B8F1E24E15500045309 /* YGNodeList.h in Headers */,
 				63AB4B901E24E15500045309 /* Yoga.h in Headers */,
 				63AB4B911E24E15500045309 /* YGLayout+Private.h in Headers */,
@@ -685,6 +687,7 @@
 				63AB4B851E24E11D00045309 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
