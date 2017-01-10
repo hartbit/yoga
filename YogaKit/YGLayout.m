@@ -76,6 +76,7 @@ YG_STYLE_EDGE_PROPERTY_UNIT_IMPL(lowercased_name, capitalized_name, capitalized_
 @interface YGLayout ()
 
 @property (nonatomic, weak, readonly) UIView *view;
+@property (nonatomic, assign) YGSize cachedSize;
 
 @end
 
@@ -292,6 +293,14 @@ static void YGAttachNodesFromViewHierachy(UIView *const view)
   if (yoga.isLeaf) {
     YGRemoveAllChildren(node);
     YGNodeSetMeasureFunc(node, YGMeasureView);
+	  
+    YGSize oldSize = yoga.cachedSize;
+    YGSize newSize = YGMeasureView(node, 0, YGMeasureModeUndefined, 0, YGMeasureModeUndefined);
+    yoga.cachedSize = newSize;
+
+    if (!YGNodeIsDirty(node) && (oldSize.width != newSize.width || oldSize.height != newSize.height)) {
+        YGNodeMarkDirty(node);
+    }
   } else {
     YGNodeSetMeasureFunc(node, NULL);
 
