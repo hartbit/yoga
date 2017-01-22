@@ -130,6 +130,7 @@ static YGConfigRef globalConfig;
 
 @property (nonatomic, weak, readonly) UIView *view;
 @property(nonatomic, assign, readonly) BOOL isUIView;
+@property (nonatomic) YGSize cachedSize;
 
 @end
 
@@ -163,28 +164,6 @@ static YGConfigRef globalConfig;
 - (void)dealloc
 {
   YGNodeFree(self.node);
-}
-
-- (BOOL)isDirty
-{
-  return YGNodeIsDirty(self.node);
-}
-
-- (void)markDirty
-{
-  if (self.isDirty || !self.isLeaf) {
-    return;
-  }
-
-  // Yoga is not happy if we try to mark a node as "dirty" before we have set
-  // the measure function. Since we already know that this is a leaf,
-  // this *should* be fine. Forgive me Hack Gods.
-  const YGNodeRef node = self.node;
-  if (YGNodeGetMeasureFunc(node) == NULL) {
-    YGNodeSetMeasureFunc(node, YGMeasureView);
-  }
-
-  YGNodeMarkDirty(node);
 }
 
 - (NSUInteger)numberOfChildren
@@ -396,6 +375,14 @@ static void YGAttachNodesFromViewHierachy(UIView *const view)
   if (yoga.isLeaf) {
     YGRemoveAllChildren(node);
     YGNodeSetMeasureFunc(node, YGMeasureView);
+
+    YGSize oldSize = yoga.cachedSize;
+    YGSize newSize = YGMeasureView(node, 0, YGMeasureModeUndefined, 0, YGMeasureModeUndefined);
+    yoga.cachedSize = newSize;
+
+    if (!YGNodeIsDirty(node) && (oldSize.width != newSize.width || oldSize.height != newSize.height)) {
+        YGNodeMarkDirty(node);
+    }
   } else {
     YGNodeSetMeasureFunc(node, NULL);
 

@@ -214,25 +214,7 @@
   XCTAssertEqual(100, container.frame.size.height);
 }
 
-- (void)testMarkingDirtyOnlyWorksOnLeafNodes
-{
-  UIView *container = [[UIView alloc] initWithFrame:CGRectZero];
-  container.yoga.isEnabled = YES;
-
-  UIView *subview = [[UIView alloc] initWithFrame:CGRectZero];
-  subview.yoga.isEnabled = YES;
-  [container addSubview:subview];
-
-  XCTAssertFalse(container.yoga.isDirty);
-  [container.yoga markDirty];
-  XCTAssertFalse(container.yoga.isDirty);
-
-  XCTAssertFalse(subview.yoga.isDirty);
-  [subview.yoga markDirty];
-  XCTAssertTrue(subview.yoga.isDirty);
-}
-
-- (void)testThatMarkingLeafsAsDirtyWillTriggerASizeRecalculation
+- (void)testThatChangingLayoutRelatedPropertiesTriggerASizeRecalculation
 {
   UIView *container = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 500, 50)];
   container.yoga.isEnabled = YES;
@@ -250,8 +232,6 @@
 
   view.text = @"This is a slightly longer text.";
   XCTAssertTrue(CGSizeEqualToSize(view.frame.size, viewSizeAfterFirstPass));
-
-  [view.yoga markDirty];
 
   [container.yoga applyLayoutPreservingOrigin:YES];
   XCTAssertFalse(CGSizeEqualToSize(view.frame.size, viewSizeAfterFirstPass));
