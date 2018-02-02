@@ -10,17 +10,20 @@ PODS:
 
 DEPENDENCIES:
   - IGListKit (~> 2.1.0)
+  - Yoga (from `../../Yoga.podspec`)
   - YogaKit (from `../../YogaKit.podspec`)
 
 EXTERNAL SOURCES:
+  Yoga:
+    :path: ../../Yoga.podspec
   YogaKit:
     :path: ../../YogaKit.podspec
 
 SPEC CHECKSUMS:
   IGListKit: b826c68ef7a4ae1626c09d4d3e1ea7a169e6c36e
-  Yoga: 2ed1d7accfef3610a67f58c0cf101a0662137f2c
-  YogaKit: 31576530e8fcae3175469719ec3212397403330b
+  Yoga: 113540da967e7c0dc7d103b78e5205bd10d118d2
+  YogaKit: c530e5bd0b1c43a9d5b45d3cf5a66cf49c203ff6
 
-PODFILE CHECKSUM: 216f8e7127767709e0e43f3711208d238fa5c404
+PODFILE CHECKSUM: 52085cc351e3833a5c161c8a74c3b9ee76fc5d9e
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.4.0
