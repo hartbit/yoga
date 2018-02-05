@@ -40,12 +40,6 @@ typedef NS_OPTIONS(NSInteger, YGDimensionFlexibility) {
     __attribute__((unavailable("you are not meant to initialise YGLayout")));
 
 /**
-  The property that decides if we should include this view when calculating
-  layout. Defaults to YES.
- */
-@property (nonatomic, readwrite, assign, setter=setIncludedInLayout:) BOOL isIncludedInLayout;
-
-/**
  The property that decides during layout/sizing whether or not styling properties should be applied.
  Defaults to NO.
  */

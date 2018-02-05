@@ -137,7 +137,6 @@ static YGConfigRef globalConfig;
 @implementation YGLayout
 
 @synthesize isEnabled=_isEnabled;
-@synthesize isIncludedInLayout=_isIncludedInLayout;
 @synthesize node=_node;
 
 + (void)initialize
@@ -154,7 +153,6 @@ static YGConfigRef globalConfig;
     _node = YGNodeNewWithConfig(globalConfig);
     YGNodeSetContext(_node, (__bridge void *) view);
     _isEnabled = NO;
-    _isIncludedInLayout = YES;
     _isUIView = [view isMemberOfClass:[UIView class]];
   }
 
@@ -177,7 +175,7 @@ static YGConfigRef globalConfig;
   if (self.isEnabled) {
     for (UIView *subview in self.view.subviews) {
       YGLayout *const yoga = subview.yoga;
-      if (yoga.isEnabled && yoga.isIncludedInLayout) {
+      if (yoga.isEnabled) {
         return NO;
       }
     }
@@ -388,7 +386,7 @@ static void YGAttachNodesFromViewHierachy(UIView *const view)
 
     NSMutableArray<UIView *> *subviewsToInclude = [[NSMutableArray alloc] initWithCapacity:view.subviews.count];
     for (UIView *subview in view.subviews) {
-      if (subview.yoga.isEnabled && subview.yoga.isIncludedInLayout) {
+      if (subview.yoga.isEnabled) {
         [subviewsToInclude addObject:subview];
       }
     }
@@ -434,7 +432,7 @@ static void YGApplyLayoutToViewHierarchy(UIView *view, BOOL preserveOrigin)
 
   const YGLayout *yoga = view.yoga;
 
-  if (!yoga.isIncludedInLayout) {
+  if (!yoga.isEnabled) {
      return;
   }
 
